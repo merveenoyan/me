@@ -576,7 +576,7 @@ html.notion-front-page .notion-app-inner {
 /* ==================================================================== */
 /* Contenteditable placeholders.
 /* ==================================================================== */
-[contenteditable]:empty:after, .forcePlaceholder:after {
+[contenteditable]:empty:after {
     content: attr(placeholder)
     }
 /* ==================================================================== */
@@ -661,22 +661,23 @@ html.notion-front-page .notion-app-inner {
 /* ==================================================================== */
 /* Sidebar loading skeleton shimmer
 /* ==================================================================== */
-.notion-sidebar-loading-skeleton-shimmer {
+.notion-shimmer {
     overflow: hidden;
-    position: relative
+    position: relative;
+    z-index: 0
     }
-.notion-sidebar-loading-skeleton-shimmer::before {
+.notion-shimmer::before {
     content: "";
     position: absolute;
     height: 100%;
     width: 100%;
     z-index: 1;
-    animation: shimmer 1s infinite
+    animation: 1s linear infinite shimmer
     }
-.notion-light-theme .notion-sidebar-loading-skeleton-shimmer::before {
+.notion-light-theme .notion-shimmer::before {
     background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0) 100%)
     }
-.notion-dark-theme .notion-sidebar-loading-skeleton-shimmer::before {
+.notion-dark-theme .notion-shimmer::before {
     background: linear-gradient(90deg, rgba(86, 86, 86, 0) 0%, rgba(86, 86, 86, 0.4) 50%, rgba(86, 86, 86, 0) 100%)
     }
 @keyframes shimmer {
