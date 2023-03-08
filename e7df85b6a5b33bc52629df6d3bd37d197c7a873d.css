@@ -474,15 +474,7 @@ mention token. */
 /* ==================================================================== */
 /* Focus Feedback */
 /* ==================================================================== */
-.notion-focusable {
-    transition: box-shadow 300ms
-    }
-/* NOTE: do not try to combine these next two rules, if you do, it will
-   break the blue focus ring on Safari */
 .notion-focusable-within:focus-within {
-    box-shadow: rgba(35, 131, 226, 0.57) 0 0 0 1px inset, rgba(35, 131, 226, 0.35) 0 0 0 2px !important
-    }
-.notion-focusable:focus-visible {
     box-shadow: rgba(35, 131, 226, 0.57) 0 0 0 1px inset, rgba(35, 131, 226, 0.35) 0 0 0 2px !important
     }
 /* ==================================================================== */
@@ -645,6 +637,47 @@ html.notion-front-page .notion-app-inner {
         } 100% {
         -webkit-transform: rotate(360deg) translateZ(0);
         transform: rotate(360deg) translateZ(0);
+        }
+    }
+/* ==================================================================== */
+/* Loading Dots (For AI).
+/* ==================================================================== */
+.loading-dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    width: 16px;
+    height: 16px
+    }
+.loading-dot {
+    width: 4px;
+    height: 4px;
+    opacity: 0.4;
+    background-color: #a782c3;
+    border-radius: 100%;
+    animation-duration: 0.5s;
+    animation-name: dotdance;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: cubic-bezier(0.11, 0, 0.5, 0)
+    }
+.loading-dots .loading-dot:nth-child(1) {
+    animation-delay: 0.2s
+    }
+.loading-dots .loading-dot:nth-child(2) {
+    animation-delay: 0.4s
+    }
+.loading-dots .loading-dot:nth-child(3) {
+    animation-delay: 0.6s
+    }
+@keyframes dotdance {
+    0% {
+        transform: translateY(0);
+        opacity: 0.4;
+        } 100% {
+        transform: translateY(2px);
+        opacity: 0.9;
         }
     }
 /* ==================================================================== */
@@ -1086,6 +1119,24 @@ table > tr {
         filter: brightness(1);
         }
     }
+@keyframes shake {
+    0% {
+        margin-left: 0rem;
+        } 25% {
+        margin-left: 0.2rem;
+        } 75% {
+        margin-left: -0.2rem;
+        } 100% {
+        margin-left: 0rem;
+        }
+    }
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        } 100% {
+        opacity: 1;
+        }
+    }
 /*!****************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./src/client/css/front.css ***!
   \****************************************************************************/
@@ -1181,10 +1232,10 @@ table > tr {
 .notion-light-theme .token.namespace {
     opacity: 0.7
     }
-.notion-light-theme .token.property, .notion-light-theme .token.tag, .notion-light-theme .token.boolean, .notion-light-theme .token.number, .notion-light-theme .token.constant, .notion-light-theme .token.symbol, .notion-light-theme .token.deleted {
+.notion-light-theme .token.property, .notion-light-theme .token.tag, .notion-light-theme .token.boolean, .notion-light-theme .token.number, .notion-light-theme .token.constant, .notion-light-theme .token.symbol, .notion-light-theme .token.deleted, .notion-light-theme .token.deleted + .token.line {
     color: #905
     }
-.notion-light-theme .token.selector, .notion-light-theme .token.attr-name, .notion-light-theme .token.string, .notion-light-theme .token.char, .notion-light-theme .token.builtin, .notion-light-theme .token.inserted {
+.notion-light-theme .token.selector, .notion-light-theme .token.attr-name, .notion-light-theme .token.string, .notion-light-theme .token.char, .notion-light-theme .token.builtin, .notion-light-theme .token.inserted, .notion-light-theme .token.inserted + .token.line {
     color: #690
     }
 .notion-light-theme .token.operator, .notion-light-theme .token.entity, .notion-light-theme .token.url, .notion-light-theme .language-css .token.string, .notion-light-theme .style .token.string {
@@ -1272,7 +1323,7 @@ table > tr {
 .notion-dark-theme .token.property, .notion-dark-theme .token.tag, .notion-dark-theme .token.boolean, .notion-dark-theme .token.number, .notion-dark-theme .token.constant, .notion-dark-theme .token.symbol {
     color: hsl(350, 40%, 70%)
     }
-.notion-dark-theme .token.selector, .notion-dark-theme .token.attr-name, .notion-dark-theme .token.string, .notion-dark-theme .token.char, .notion-dark-theme .token.builtin, .notion-dark-theme .token.inserted {
+.notion-dark-theme .token.selector, .notion-dark-theme .token.attr-name, .notion-dark-theme .token.string, .notion-dark-theme .token.char, .notion-dark-theme .token.builtin, .notion-dark-theme .token.inserted, .notion-dark-theme .token.inserted + .token.line {
     color: hsl(75, 70%, 60%)
     }
 .notion-dark-theme .token.operator, .notion-dark-theme .token.entity, .notion-dark-theme .token.url, .notion-dark-theme .language-css .token.string, .notion-dark-theme .style .token.string, .notion-dark-theme .token.variable {
@@ -1293,7 +1344,7 @@ table > tr {
 .notion-dark-theme .token.entity {
     cursor: help
     }
-.notion-dark-theme .token.deleted {
+.notion-dark-theme .token.deleted, .notion-dark-theme .token.deleted + .token.line {
     color: red
     }
 /*!********************************************************************************!*\

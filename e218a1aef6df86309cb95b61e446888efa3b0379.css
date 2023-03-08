@@ -58,3 +58,6 @@ html {
     size: auto;
     margin: 20mm 0 20mm 0
     }
+.notion-table-content {
+    padding: 0 !important
+    }
